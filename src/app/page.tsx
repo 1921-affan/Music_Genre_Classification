@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { MusicalNoteIcon, MicrophoneIcon, BookOpenIcon } from '@heroicons/react/24/solid';
+import { MusicalNoteIcon, BookOpenIcon } from '@heroicons/react/24/solid';
 import { Typewriter } from 'react-simple-typewriter';
 import { useInView } from 'react-intersection-observer';
 
@@ -43,7 +43,7 @@ export default function Home() {
           priority
         />
         <div className="absolute inset-0 bg-purple-900/30" />
-        
+
         {/* Centered Content */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <h1 className="text-6xl font-bold mb-4 text-center text-white">
@@ -68,9 +68,8 @@ export default function Home() {
         <div ref={ref1}>
           <Link href="/genre-classification" className="block">
             <div
-              className={`p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-500 relative overflow-hidden group ${
-                inView1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
+              className={`p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-500 relative overflow-hidden group ${inView1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                }`}
               style={{ backgroundColor: sectionColor }}
             >
               <div className="relative z-10 flex items-center justify-between">
@@ -103,50 +102,11 @@ export default function Home() {
           </Link>
         </div>
 
-        <div ref={ref2}>
-          <Link href="/song-details" className="block">
-            <div
-              className={`p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-500 relative overflow-hidden group ${
-                inView2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
-              style={{ backgroundColor: sectionColor }}
-            >
-              <div className="relative z-10 flex items-center justify-between">
-                <div>
-                  <MicrophoneIcon className="h-16 w-16 text-white mb-4" />
-                  <h2 className="text-2xl font-bold text-white mb-2">Song Identification</h2>
-                  <p className="text-purple-100 mb-4">
-                   Discover your songs 
-                  </p>
-                  <ul className="space-y-2 text-white/90">
-                    <li className="flex items-center">
-                      <span className="mr-2">•</span>
-                      Access detailed information about millions of songs
-                    </li>
-                    <li className="flex items-center">
-                      <span className="mr-2">•</span>
-                      View  song metrics and analytics
-                    </li>
-                    <li className="flex items-center">
-                      <span className="mr-2">•</span>
-                      Discover similar songs and recommendations
-                    </li>
-                  </ul>
-                </div>
-                <div className="flex items-center justify-center h-8 w-8 bg-white rounded-full">
-                  <span className="text-purple-800 text-lg font-bold">→</span>
-                </div>
-              </div>
-            </div>
-          </Link>
-        </div>
-
         <div ref={ref3}>
           <Link href="/chatbot" className="block">
             <div
-              className={`p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-500 relative overflow-hidden group ${
-                inView3 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
+              className={`p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-500 relative overflow-hidden group ${inView3 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                }`}
               style={{ backgroundColor: sectionColor }}
             >
               <div className="relative z-10 flex items-center justify-between">

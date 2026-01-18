@@ -13,7 +13,7 @@ interface ClassificationResult {
 }
 
 // Define the workflow steps
-const workflowSteps = ['Upload', 'Preprocessing', 'Feature Extraction', 'Inference'];
+const workflowSteps = ['upload', 'preprocessing', 'feature_extraction', 'inference', 'complete'];
 
 export default function GenreClassification() {
   const [isDragging, setIsDragging] = useState(false);
@@ -26,7 +26,8 @@ export default function GenreClassification() {
   useEffect(() => {
     const socket = io('http://localhost:5000');
     socket.on('progress', (data) => {
-      const stepIndex = workflowSteps.findIndex(step => step.toLowerCase().includes(data.step));
+      // Find index of step that matches data.step exactly or is included
+      const stepIndex = workflowSteps.findIndex(step => step === data.step);
       if (stepIndex !== -1) {
         setCurrentStep(stepIndex);
       }
@@ -45,17 +46,17 @@ export default function GenreClassification() {
       setCurrentStep(0);
     }
   };
-  
+
   const handleDragEnter = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     setIsDragging(true);
   };
-  
+
   const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     setIsDragging(false);
   };
-  
+
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     setIsDragging(false);
@@ -63,27 +64,27 @@ export default function GenreClassification() {
     setFile(droppedFile);
     setCurrentStep(0);
   };
-  
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-  
+
     if (!file) {
       alert("Please upload an audio file.");
       return;
     }
-  
+
     const formData = new FormData();
     formData.append("file", file);
-  
+
     setLoading(true);
     setClassificationResult(null);
-  
+
     try {
-      const response = await fetch("http://127.0.0.1:5000/predict", {
+      const response = await fetch("http://localhost:5000/predict", {
         method: "POST",
         body: formData,
       });
-  
+
       const data: ClassificationResult = await response.json();
       if (data.status === 'success') {
         setClassificationResult(data);
@@ -100,7 +101,7 @@ export default function GenreClassification() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start justify-center min-h-screen bg-gradient-to-b from-purple-50 to-white relative overflow-hidden p-8">
-      {}
+      { }
       <svg className="absolute top-0 left-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <pattern id="music-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
@@ -116,7 +117,7 @@ export default function GenreClassification() {
         <h1 className="text-4xl font-bold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 animate-pulse relative z-10">
           Classify Your Music
         </h1>
-      
+
       </div>
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-xl relative overflow-hidden z-10">
         <div className="relative z-10">
@@ -134,9 +135,8 @@ export default function GenreClassification() {
             >
               <label
                 htmlFor="dropzone-file"
-                className={`flex flex-col items-center justify-center w-full h-64 border-2 border-purple-300 border-dashed rounded-lg cursor-pointer bg-purple-50 hover:bg-purple-100 transition-all duration-300 ${
-                  isDragging ? 'border-purple-500 bg-purple-100' : ''
-                }`}
+                className={`flex flex-col items-center justify-center w-full h-64 border-2 border-purple-300 border-dashed rounded-lg cursor-pointer bg-purple-50 hover:bg-purple-100 transition-all duration-300 ${isDragging ? 'border-purple-500 bg-purple-100' : ''
+                  }`}
               >
                 <div className="flex flex-col items-center justify-center pt-5 pb-6">
                   <svg
@@ -190,9 +190,8 @@ export default function GenreClassification() {
             {workflowSteps.map((step, index) => (
               <div key={step} className="flex flex-col items-center">
                 <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                    index <= currentStep ? 'bg-purple-600 text-white' : 'bg-gray-200 text-gray-600'
-                  }`}
+                  className={`w-8 h-8 rounded-full flex items-center justify-center ${index <= currentStep ? 'bg-purple-600 text-white' : 'bg-gray-200 text-gray-600'
+                    }`}
                 >
                   {index + 1}
                 </div>
