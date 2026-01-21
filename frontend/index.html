@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Genre AI | High-Precision Analysis</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+</head>
+
+<body>
+    <div class="background-glow"></div>
+    <div class="background-glow-secondary"></div>
+
+    <main class="container">
+        <header class="header">
+            <div class="badge">
+                <span class="pulse"></span>
+                EfficientNet Model v1.0
+            </div>
+            <h1>Music Genre <span class="gradient-text">Classifier</span></h1>
+            <p class="subtitle">Advanced neural network analysis for professional audio classification.</p>
+        </header>
+
+        <section class="dropzone-card" id="dropzone">
+            <div class="upload-icon">
+                <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M7 16.5V11L12 6L17 11V16.5M12 6V18M4.5 16.5H19.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </div>
+            <h3>Drag and drop your audio file</h3>
+            <p>or click to browse from your computer</p>
+            <input type="file" id="fileInput" accept="audio/*" hidden>
+            <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">Select File</button>
+        </section>
+
+        <!-- Progress Section -->
+        <div class="progress-section hidden" id="progressSection">
+            <div class="file-info" id="fileInfo">
+                <span class="file-name" id="fileName">song.mp3</span>
+                <span class="file-size" id="fileSize">4.2 MB</span>
+            </div>
+
+            <div class="steps-container">
+                <div class="step" data-step="upload">
+                    <div class="step-circle">1</div>
+                    <div class="step-label">Uploading</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" data-step="preprocessing">
+                    <div class="step-circle">2</div>
+                    <div class="step-label">Preprocessing</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" data-step="feature_extraction">
+                    <div class="step-circle">3</div>
+                    <div class="step-label">Analysis</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" data-step="inference">
+                    <div class="step-circle">4</div>
+                    <div class="step-label">Inference</div>
+                </div>
+            </div>
+
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <p class="status-message" id="statusMessage">Preparing analysis...</p>
+        </div>
+
+        <!-- Result Section -->
+        <div class="result-card hidden" id="resultCard">
+            <div class="result-header">
+                <h3>Classification Result</h3>
+                <div class="confidence-badge" id="confidenceBadge">98.5% Confidence</div>
+            </div>
+            <div class="genre-display" id="genreResult">Jazz</div>
+
+            <div class="vote-chart" id="voteChart">
+                <!-- Chart bars will be injected here -->
+
+
+                <!-- Explainability Section -->
+                <div id="explainabilitySection" class="hidden">
+                    <h4>AI Attention Heatmap (Grad-CAM)</h4>
+                    <p class="small-text">See which parts of the spectrogram influenced the decision.</p>
+
+                    <div class="heatmap-annotated">
+                        <!-- Y-axis label (Frequency) -->
+                        <div class="axis-label axis-y">
+                            <span style="writing-mode: vertical-rl; transform: rotate(180deg);">
+                                Frequency (Mel Scale: 0 - 11 kHz) →
+                            </span>
+                        </div>
+
+                        <!-- Heatmap container -->
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <div class="heatmap-container">
+                                <img id="gradcamImage" src="" alt="Grad-CAM Heatmap">
+                            </div>
+
+                            <!-- X-axis label (Time) -->
+                            <div class="axis-label axis-x">
+                                ← Time: 0.0s to 3.0s →
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="small-text" style="margin-top: 15px; opacity: 0.7;">
+                        <strong>How to read:</strong> Red/yellow regions = high AI attention, Blue/purple = low
+                        attention.
+                        The AI analyzed a 3-second audio segment across 128 Mel-frequency bands (0-11kHz).
+                    </p>
+                </div>
+
+
+
+                <button class="btn btn-secondary" onclick="resetUI()">Analyze New Audio</button>
+                <a href="/info.html" class="btn btn-primary" style="margin-left: 10px;">View Technical Details →</a>
+            </div>
+
+            <footer class="footer" style="margin-top: 40px;">
+                <p>Powered by TensorFlow & Librosa • Professional Audio Intelligence</p>
+            </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

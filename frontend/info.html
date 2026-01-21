@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Details | Music Genre AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-glow"></div>
+    <div class="background-glow-secondary"></div>
+
+    <main class="container">
+        <header class="header">
+            <div class="badge">
+                <span class="pulse"></span>
+                EfficientNet Model v1.0
+            </div>
+            <h1>Technical <span class="gradient-text">Information</span></h1>
+            <p class="subtitle">Deep dive into the architecture, features, and performance metrics.</p>
+            <a href="/" class="btn btn-secondary" style="display: inline-block; margin-top: 20px;">← Back to
+                Analyzer</a>
+        </header>
+
+        <!-- Technical Dashboard Sections -->
+        <div class="dashboard-grid">
+            <!-- EfficientNet Details -->
+            <section class="info-card">
+                <div class="tech-icon">🧬</div>
+                <h3>EfficientNet Architecture</h3>
+                <p>The system leverages <strong>EfficientNetB0</strong>, a state-of-the-art CNN architecture that
+                    optimizes both accuracy and efficiency using compound scaling.</p>
+                <ul class="tech-list">
+                    <li><strong>Compound Scaling:</strong> Balances depth, width, and resolution.</li>
+                    <li><strong>MobileInverted Bottleneck:</strong> High performance with low latency.</li>
+                    <li><strong>Transfer Learning:</strong> Fine-tuned specifically for audio patterns.</li>
+                </ul>
+            </section>
+
+            <!-- Mel-Spectrogram Explanation -->
+            <section class="info-card">
+                <div class="tech-icon">📊</div>
+                <h3>Understanding Mel-Spectrograms</h3>
+
+                <h4 style="margin-top: 20px; color: #a78bfa;">What is a Mel-Spectrogram?</h4>
+                <p>A <strong>Mel-Spectrogram</strong> is a "picture of sound" - it's a visual representation that shows
+                    which frequencies (pitches) are present in audio and how they change over time.</p>
+
+                <div class="img-wrapper">
+                    <img src="assets/mel_spectrogram.png" alt="Mel Spectrogram Analysis" class="tech-img">
+                </div>
+
+                <h4 style="margin-top: 25px; color: #a78bfa;">How to Read It:</h4>
+                <ul class="tech-list">
+                    <li><strong>X-axis (Horizontal):</strong> Time progression - left to right shows how the sound
+                        evolves</li>
+                    <li><strong>Y-axis (Vertical):</strong> Frequency - bottom shows low pitches (bass), top shows high
+                        pitches (treble)</li>
+                    <li><strong>Colors:</strong> Intensity/loudness - brighter colors = louder sound at that frequency
+                    </li>
+                </ul>
+
+                <h4 style="margin-top: 25px; color: #a78bfa;">Why "Mel" Scale?</h4>
+                <p>The <strong>Mel scale</strong> is designed to match human hearing. We're better at distinguishing
+                    between low pitches (100Hz vs 200Hz) than high pitches (8000Hz vs 8100Hz sound almost identical).
+                    The Mel scale compresses high frequencies to match how we actually perceive music.</p>
+
+                <h4 style="margin-top: 25px; color: #a78bfa;">Perfect for Genre Classification:</h4>
+                <ul class="tech-list">
+                    <li><strong>Captures Timbre:</strong> Different instruments create unique frequency signatures</li>
+                    <li><strong>Shows Rhythm:</strong> Beats appear as repeating vertical patterns</li>
+                    <li><strong>Preserves Harmony:</strong> Chords and melodies create distinct horizontal structures
+                    </li>
+                    <li><strong>Genre-Specific Patterns:</strong> Rock shows guitar harmonics, Hip-Hop shows strong
+                        bass, Classical shows wide frequency range</li>
+                </ul>
+
+                <p class="img-caption" style="margin-top: 20px;">
+                    <strong>Example:</strong> In your Grad-CAM results, red/yellow regions on the Mel-Spectrogram show
+                    exactly which frequencies and time segments the AI focused on to identify the genre!
+                </p>
+            </section>
+        </div>
+
+        <!-- Training Insights Section -->
+        <section class="training-section">
+            <div class="section-title">
+                <h2>Model Performance & Training Insights</h2>
+                <p>Empirical evidence of the model's reliability and accuracy across 10 distinct genres.</p>
+            </div>
+
+            <div class="plots-grid">
+                <div class="plot-item">
+                    <h4>Accuracy Over Epochs</h4>
+                    <img src="assets/EfficientNet_Accuracy.png" alt="Accuracy Plot">
+                    <p>Demonstrates the learning curve and final validation precision.</p>
+                </div>
+                <div class="plot-item">
+                    <h4>Loss Reduction</h4>
+                    <img src="assets/EfficientNet_Loss.png" alt="Loss Plot">
+                    <p>Visualizing the minimization of error during training.</p>
+                </div>
+                <div class="plot-item">
+                    <h4>Confusion Matrix</h4>
+                    <img src="assets/EfficientNet_Confusion_Matrix.png" alt="Confusion Matrix">
+                    <p>Detailed breakdown of categorization performance per genre.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>Powered by TensorFlow & Librosa • Professional Audio Intelligence</p>
+        </footer>
+    </main>
+</body>
+
+</html>
