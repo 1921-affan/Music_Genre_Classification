@@ -59,12 +59,38 @@ ANN0509/
 
 ---
 
+## � Model Training Process
+
+The model was trained using the **GTZAN Music Genre Dataset**, following a rigorous preprocessing and transfer learning pipeline.
+
+### 1️⃣ Preprocessing & Feature Extraction
+- **Mel-Spectrogram Generation**: Audio signals were converted into Mel-Spectrograms (images of sound) using `librosa`.
+- **Audio Slicing**: To maximize data, each 30-second track was sliced into **10 segments of 3 seconds each**, effectively increasing the dataset size tenfold.
+- **Normalization**: Log-scaled Mel-Spectrograms were resized to $224 \times 224 \times 3$ and normalized to a 0-255 pixel range.
+
+### 2️⃣ Architecture: EfficientNet-B0
+- **Transfer Learning**: We utilized **EfficientNet-B0** pre-trained on ImageNet as the feature extractor.
+- **Custom Classification Head**:
+    - `GlobalAveragePooling2D` to reduce spatial dimensionality.
+    - `Dense` layer with 512 units and `ReLU` activation.
+    - `Dropout(0.5)` for regularization and to prevent overfitting.
+    - `Softmax` output layer for 10-class probability distribution.
+- **Optimization**: The model was compiled with the `Adam` optimizer (learning rate: 1e-4) and trained with `Sparse Categorical Crossentropy` loss.
+
+### 3️⃣ Training Performance
+- **Epochs**: 15 (with Learning Rate reduction on plateau).
+- **Batch Size**: 32.
+- **Stability**: Batch Normalization layers were frozen during training to maintain stable statistics across audio segments.
+
+---
+
 ## 📊 Technical Details
-- **Model**: EfficientNet (Transfer Learning)
-- **Input**: Mel Spectrograms (128x128)
+- **Model**: EfficientNet-B0 (Transfer Learning)
+- **Input Dimensions**: $224 \times 224 \times 3$
+- **Inference Strategy**: Voting mechanism across multiple 3-second chunks of a song.
 - **Genres**: Blues, Classical, Country, Disco, Hiphop, Jazz, Metal, Pop, Reggae, Rock.
-- **Backend**: Python, Flask, TensorFlow, Keras 3.
-- **Frontend**: Vanilla HTML5, CSS3, JavaScript (ES6+).
+- **Backend Stack**: Python, Flask, TensorFlow, Keras 3.
+- **Frontend Stack**: Vanilla HTML5, CSS3, JavaScript (ES6+).
 
 ---
 
